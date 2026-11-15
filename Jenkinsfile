@@ -30,9 +30,10 @@ pipeline {
                 echo 'Building project and running tests'
 
                 sh '''
+
                     docker run --rm \
-                    -v "$WORKSPACE:/app" \
-                    -w /app \
+                    --volumes-from jenkins \
+                    -w "$WORKSPACE" \
                     node:20-alpine \
                     sh -c "npm install && npm test"
                 '''
